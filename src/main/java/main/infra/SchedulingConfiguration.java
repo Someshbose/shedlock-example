@@ -18,11 +18,6 @@ public class SchedulingConfiguration {
 
   @Bean
   public LockProvider lockProvider(DataSource dataSource) {
-    return new JdbcTemplateLockProvider(Configuration.builder()
-            .withJdbcTemplate(new JdbcTemplate(dataSource))
-            .withTableName("shedlock")
-            .withColumnNames(new JdbcTemplateLockProvider.ColumnNames("n", "lck_untl", "lckd_at", "lckd_by"))
-            .withLockedByValue("my-value")
-            .build());
+    return new JdbcTemplateLockProvider(dataSource);
   }
 }
